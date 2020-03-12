@@ -10,7 +10,6 @@
 		255CBA51241A03B40088580E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CBA50241A03B40088580E /* AppDelegate.swift */; };
 		255CBA53241A03B40088580E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CBA52241A03B40088580E /* SceneDelegate.swift */; };
 		255CBA55241A03B40088580E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CBA54241A03B40088580E /* ViewController.swift */; };
-		255CBA58241A03B40088580E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255CBA56241A03B40088580E /* Main.storyboard */; };
 		255CBA5A241A03B40088580E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 255CBA59241A03B40088580E /* Assets.xcassets */; };
 		255CBA5D241A03B40088580E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255CBA5B241A03B40088580E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,10 +19,10 @@
 		255CBA50241A03B40088580E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		255CBA52241A03B40088580E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		255CBA54241A03B40088580E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		255CBA57241A03B40088580E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		255CBA59241A03B40088580E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		255CBA5C241A03B40088580E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		255CBA5E241A03B40088580E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		255CBA64241A057D0088580E /* RealmTutorial.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RealmTutorial.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +55,10 @@
 		255CBA4F241A03B40088580E /* RealmTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				255CBA64241A057D0088580E /* RealmTutorial.entitlements */,
 				255CBA50241A03B40088580E /* AppDelegate.swift */,
 				255CBA52241A03B40088580E /* SceneDelegate.swift */,
 				255CBA54241A03B40088580E /* ViewController.swift */,
-				255CBA56241A03B40088580E /* Main.storyboard */,
 				255CBA59241A03B40088580E /* Assets.xcassets */,
 				255CBA5B241A03B40088580E /* LaunchScreen.storyboard */,
 				255CBA5E241A03B40088580E /* Info.plist */,
@@ -127,7 +126,6 @@
 			files = (
 				255CBA5D241A03B40088580E /* LaunchScreen.storyboard in Resources */,
 				255CBA5A241A03B40088580E /* Assets.xcassets in Resources */,
-				255CBA58241A03B40088580E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +145,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		255CBA56241A03B40088580E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				255CBA57241A03B40088580E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		255CBA5B241A03B40088580E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -284,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RealmTutorial/RealmTutorial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = RealmTutorial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -293,7 +284,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jina.RealmTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -301,6 +292,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RealmTutorial/RealmTutorial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = RealmTutorial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,7 +302,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jina.RealmTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
