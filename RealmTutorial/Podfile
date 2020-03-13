@@ -1,0 +1,11 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'RealmTutorial' do                                                       
+
+use_modular_headers!                                                            
+
+pod 'RealmSwift', '~> 3.17', :modular_headers => true
+
+
+end
