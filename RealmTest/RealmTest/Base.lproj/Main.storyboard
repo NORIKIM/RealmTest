@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +10,99 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RealmTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="122" translatesAutoresizingMaskIntoConstraints="NO" id="RGS-QO-M03">
+                                <rect key="frame" x="20" y="64" width="374" height="34"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="물건" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dq3-6z-Kc8">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfc-HV-f8i">
+                                        <rect key="frame" x="192" y="0.0" width="30" height="34"/>
+                                        <state key="normal" title="추가"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85c-Zc-tP6">
+                                        <rect key="frame" x="344" y="0.0" width="30" height="34"/>
+                                        <state key="normal" title="삭제"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="dq3-6z-Kc8" firstAttribute="leading" secondItem="RGS-QO-M03" secondAttribute="leading" constant="20" symbolic="YES" id="226-y4-grS"/>
+                                    <constraint firstItem="85c-Zc-tP6" firstAttribute="top" secondItem="RGS-QO-M03" secondAttribute="top" constant="20" symbolic="YES" id="5o5-Cl-urX"/>
+                                    <constraint firstAttribute="bottom" secondItem="85c-Zc-tP6" secondAttribute="bottom" constant="20" symbolic="YES" id="Be9-87-yCW"/>
+                                    <constraint firstItem="hfc-HV-f8i" firstAttribute="leading" secondItem="dq3-6z-Kc8" secondAttribute="trailing" constant="20" id="CUQ-G0-baZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="hfc-HV-f8i" secondAttribute="bottom" constant="20" symbolic="YES" id="amU-2N-ztH"/>
+                                    <constraint firstAttribute="bottom" secondItem="dq3-6z-Kc8" secondAttribute="bottom" constant="20" symbolic="YES" id="bLZ-7z-rvC"/>
+                                    <constraint firstAttribute="trailing" secondItem="85c-Zc-tP6" secondAttribute="trailing" constant="20" symbolic="YES" id="inD-u7-rgE"/>
+                                    <constraint firstItem="dq3-6z-Kc8" firstAttribute="top" secondItem="RGS-QO-M03" secondAttribute="top" constant="20" symbolic="YES" id="jR2-7E-uX2"/>
+                                    <constraint firstItem="hfc-HV-f8i" firstAttribute="top" secondItem="RGS-QO-M03" secondAttribute="top" constant="20" symbolic="YES" id="ksa-aM-yYw"/>
+                                    <constraint firstItem="85c-Zc-tP6" firstAttribute="leading" secondItem="hfc-HV-f8i" secondAttribute="trailing" constant="20" id="vI3-7e-bvj"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="47" translatesAutoresizingMaskIntoConstraints="NO" id="DLC-ZA-ZpD">
+                                <rect key="frame" x="20" y="114" width="374" height="34"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="가격" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rmO-bW-Qwy">
+                                        <rect key="frame" x="0.0" y="0.0" width="198" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fE-f0-rIf">
+                                        <rect key="frame" x="245" y="0.0" width="30" height="34"/>
+                                        <state key="normal" title="조회"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohR-o4-izC">
+                                        <rect key="frame" x="322" y="0.0" width="52" height="34"/>
+                                        <state key="normal" title="업데이트"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sU-W1-sQd">
+                                <rect key="frame" x="0.0" y="173" width="414" height="689"/>
+                                <connections>
+                                    <segue destination="erJ-ng-pas" kind="embed" id="yzV-Ew-tbP"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="DLC-ZA-ZpD" firstAttribute="top" secondItem="RGS-QO-M03" secondAttribute="bottom" constant="16" id="1KR-oq-9BF"/>
+                            <constraint firstItem="2sU-W1-sQd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="851-nH-u3l"/>
+                            <constraint firstItem="RGS-QO-M03" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9C8-pd-Cq9"/>
+                            <constraint firstItem="DLC-ZA-ZpD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="B7c-QR-2uI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DLC-ZA-ZpD" secondAttribute="trailing" constant="20" id="DfH-tO-eoL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RGS-QO-M03" secondAttribute="trailing" constant="20" id="Jp0-Xi-gAx"/>
+                            <constraint firstItem="2sU-W1-sQd" firstAttribute="top" secondItem="DLC-ZA-ZpD" secondAttribute="bottom" constant="25" id="Msb-2n-NAX"/>
+                            <constraint firstItem="2sU-W1-sQd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="VEY-Hh-UJR"/>
+                            <constraint firstItem="2sU-W1-sQd" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="cQC-NN-RxN"/>
+                            <constraint firstItem="RGS-QO-M03" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="uQl-6H-7fT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="i1T-E4-tam">
+            <objects>
+                <viewController id="erJ-ng-pas" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1vS-SV-29A">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="689"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xKU-CT-jTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="133" y="526"/>
         </scene>
     </scenes>
 </document>
