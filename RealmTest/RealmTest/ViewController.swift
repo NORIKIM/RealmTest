@@ -50,9 +50,9 @@ class ViewController: UIViewController {
         )*/*/
         
         let park = Player()
-        park.name = "Park"
-        park.position = "CD"
-        park.age = 20
+        park.name = "Kim"
+        park.position = "CF"
+        park.age = 33
         
         do {
             try realm.write {
@@ -66,6 +66,14 @@ class ViewController: UIViewController {
         var player: Results<Player>
         player = realm.objects(Player.self)
         
-       
+        var playerList = player
+        playerList = playerList.filter("name Contains[cd] %@", "kim").sorted(byKeyPath: "name", ascending: true)
+        
+        func getDocumentsDirectory() -> URL {
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentsDirectory = paths[0]
+            return documentsDirectory
+        }
+        print(getDocumentsDirectory())
     }
 }
