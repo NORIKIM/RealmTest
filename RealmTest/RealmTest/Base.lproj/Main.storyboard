@@ -30,10 +30,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfc-HV-f8i">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                 <state key="normal" title="추가"/>
+                                                <connections>
+                                                    <action selector="add:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F2U-0E-On7"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85c-Zc-tP6">
                                                 <rect key="frame" x="130" y="0.0" width="48" height="30"/>
                                                 <state key="normal" title="삭제"/>
+                                                <connections>
+                                                    <action selector="delete:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ou8-rs-QNA"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -43,10 +49,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fE-f0-rIf">
                                                 <rect key="frame" x="0.0" y="3.5" width="30" height="30"/>
                                                 <state key="normal" title="조회"/>
+                                                <connections>
+                                                    <action selector="check:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hnI-of-2ZE"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohR-o4-izC">
                                                 <rect key="frame" x="126" y="3.5" width="52" height="30"/>
                                                 <state key="normal" title="업데이트"/>
+                                                <connections>
+                                                    <action selector="update:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qak-Sl-D33"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -84,6 +96,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="itemTF" destination="dq3-6z-Kc8" id="HVX-Va-k8f"/>
+                        <outlet property="priceTF" destination="rmO-bW-Qwy" id="lLA-Ul-eCx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -92,12 +108,37 @@
         <!--View Controller-->
         <scene sceneID="i1T-E4-tam">
             <objects>
-                <viewController id="erJ-ng-pas" sceneMemberID="viewController">
+                <viewController id="erJ-ng-pas" customClass="ViewController" customModule="RealmTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1vS-SV-29A">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="688"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="GFd-sT-qYf">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="688"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TdW-Fo-WjS">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TdW-Fo-WjS" id="H52-Sf-fn8">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="GFd-sT-qYf" firstAttribute="leading" secondItem="1vS-SV-29A" secondAttribute="leading" id="2B4-I2-J1C"/>
+                            <constraint firstAttribute="bottom" secondItem="GFd-sT-qYf" secondAttribute="bottom" id="SZh-0x-E8c"/>
+                            <constraint firstItem="GFd-sT-qYf" firstAttribute="top" secondItem="1vS-SV-29A" secondAttribute="top" id="lnd-8z-aew"/>
+                            <constraint firstAttribute="trailing" secondItem="GFd-sT-qYf" secondAttribute="trailing" id="nSu-hF-eUM"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="shoppingListTB" destination="GFd-sT-qYf" id="6RR-hF-pdl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xKU-CT-jTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
