@@ -4,7 +4,10 @@
 //
 //  Created by 김지나 on 2020/03/16.
 //  Copyright © 2020 김지나. All rights reserved.
-// 참고: https://jinshine.github.io/2018/11/20/iOS/Realm%20사용방법/
+/* 참고:
+ https://jinshine.github.io/2018/11/20/iOS/Realm%20사용방법/
+ https://realm.io/docs/swift/latest/#notifications
+*/
 
 import UIKit
 import RealmSwift
@@ -17,6 +20,7 @@ class ShoppingList: Object {
 class ViewController: UIViewController {
     var item: Results<ShoppingList>?
     var realm: Realm?
+    var notificationToken: NotificationToken?
     
     @IBOutlet weak var itemTF: UITextField!
     @IBOutlet weak var priceTF: UITextField!
@@ -24,14 +28,48 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        realm = try? Realm()
+    
+        realm = try! Realm()
         
         // ShoppingList 데이터 가져옴
         item = realm?.objects(ShoppingList.self)
         
+        notificationRealm()
     }
     
+    deinit {
+        notificationToken?.invalidate()
+    }
+    // Realm 파일 위치
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    // Realm 알림
+    func notificationRealm() {
+        notificationToken = item?.observe { [weak self] (changes: RealmCollectionChange) in
+                guard let tableView = self?.shoppingListTB else { return }
+                switch changes {
+                case .initial:
+                    tableView.reloadData()
+                case .update(_, let deletions, let insertions, let modifications):
+                    tableView.beginUpdates()
+                    tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                         with: .automatic)
+                    tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                         with: .automatic)
+                    tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                         with: .automatic)
+                    tableView.endUpdates()
+                case .error(let error):
+                    fatalError("\(error)")
+                }
+            }
+    }
+
+    // 텍스트필드 값 ShoppingList에 대입
     func inputData(database: ShoppingList) -> ShoppingList {
         if let name = itemTF.text {
             database.name = name
@@ -39,10 +77,10 @@ class ViewController: UIViewController {
         if let price = priceTF.text {
             database.price = price
         }
-        
         return database
     }
     
+    //MARK: Button Action
     @IBAction func add(_ sender: UIButton) {
         try! realm?.write {
             realm?.add(inputData(database: ShoppingList()))
@@ -52,7 +90,8 @@ class ViewController: UIViewController {
     @IBAction func deleteData(_ sender: UIButton) {
         do {
             try realm?.write {
-                realm?.delete(item!)
+                guard let result = realm?.objects(ShoppingList.self).filter("name = %@", itemTF.text).first else { return }
+                realm?.delete(result)
             }
         } catch {
             print("Error")
@@ -75,9 +114,31 @@ class ViewController: UIViewController {
     }
     
     @IBAction func check(_ sender: UIButton) {
-        print(realm?.objects(ShoppingList.self))
+        let result = realm?.objects(ShoppingList.self).filter("name Contains[cd] %@", itemTF.text).sorted(byKeyPath: "name", ascending: true)
+        print(result)
     }
-    
 }
 
+//MARK: tableView
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+   
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let items = item else { return 0 }
+        return items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ShoppingListCell
+        guard let items = item else { return cell }
+        let item = items[indexPath.row]
+        cell.itemLB.text = item.name
+        cell.priceLB.text = item.price
+        return cell
+    }
 
+}
+
+class ShoppingListCell: UITableViewCell {
+    @IBOutlet weak var itemLB: UILabel!
+    @IBOutlet weak var priceLB: UILabel!
+}

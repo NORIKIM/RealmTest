@@ -31,14 +31,14 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                 <state key="normal" title="추가"/>
                                                 <connections>
-                                                    <action selector="add:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F2U-0E-On7"/>
+                                                    <action selector="add:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hLk-82-F1z"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85c-Zc-tP6">
                                                 <rect key="frame" x="130" y="0.0" width="48" height="30"/>
                                                 <state key="normal" title="삭제"/>
                                                 <connections>
-                                                    <action selector="delete:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ou8-rs-QNA"/>
+                                                    <action selector="deleteData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wuS-Qa-wcC"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -117,15 +117,39 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="688"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TdW-Fo-WjS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="TdW-Fo-WjS" customClass="ShoppingListCell" customModule="RealmTest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TdW-Fo-WjS" id="H52-Sf-fn8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zT-jJ-6gk">
+                                                    <rect key="frame" x="43" y="11" width="133" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmZ-eK-GAT">
+                                                    <rect key="frame" x="247" y="11" width="123" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="itemLB" destination="2zT-jJ-6gk" id="HKb-ak-dIk"/>
+                                            <outlet property="priceLB" destination="hmZ-eK-GAT" id="gJX-Bp-oue"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="erJ-ng-pas" id="bN1-fQ-LTf"/>
+                                    <outlet property="delegate" destination="erJ-ng-pas" id="N5I-RO-xcF"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -135,6 +159,7 @@
                             <constraint firstItem="GFd-sT-qYf" firstAttribute="top" secondItem="1vS-SV-29A" secondAttribute="top" id="lnd-8z-aew"/>
                             <constraint firstAttribute="trailing" secondItem="GFd-sT-qYf" secondAttribute="trailing" id="nSu-hF-eUM"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="aRF-Fs-VSC"/>
                     </view>
                     <connections>
                         <outlet property="shoppingListTB" destination="GFd-sT-qYf" id="6RR-hF-pdl"/>
@@ -142,7 +167,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xKU-CT-jTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="865" y="188"/>
+            <point key="canvasLocation" x="863.768115942029" y="187.5"/>
         </scene>
     </scenes>
 </document>
