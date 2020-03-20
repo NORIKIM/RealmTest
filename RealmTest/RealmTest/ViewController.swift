@@ -18,9 +18,13 @@ class ShoppingList: Object {
 }
 
 class ViewController: UIViewController {
-    var item: Results<ShoppingList>?
+    
     var realm: Realm?
     var notificationToken: NotificationToken?
+    
+    var item: Results<ShoppingList>?
+    var searchItem = [ShoppingList]()
+    var searching = false
     
     @IBOutlet weak var itemTF: UITextField!
     @IBOutlet weak var priceTF: UITextField!
@@ -28,18 +32,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         realm = try! Realm()
         
         // ShoppingList 데이터 가져옴
         item = realm?.objects(ShoppingList.self)
         
-        notificationRealm()
+        notificationRealm() 
     }
     
     deinit {
         notificationToken?.invalidate()
     }
+    
+    //MARK: fuction ---------------------------------------------------------------------------
     // Realm 파일 위치
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -69,7 +75,7 @@ class ViewController: UIViewController {
             }
     }
 
-    // 텍스트필드 값 ShoppingList에 대입
+    // 텍스트필드 값 item(ShoppingList)에 대입
     func inputData(database: ShoppingList) -> ShoppingList {
         if let name = itemTF.text {
             database.name = name
@@ -80,7 +86,7 @@ class ViewController: UIViewController {
         return database
     }
     
-    //MARK: Button Action
+    //MARK: Button Action ---------------------------------------------------------------------------
     @IBAction func add(_ sender: UIButton) {
         try! realm?.write {
             realm?.add(inputData(database: ShoppingList()))
@@ -114,31 +120,79 @@ class ViewController: UIViewController {
     }
     
     @IBAction func check(_ sender: UIButton) {
-        let result = realm?.objects(ShoppingList.self).filter("name Contains[cd] %@", itemTF.text).sorted(byKeyPath: "name", ascending: true)
+        guard let result = realm?.objects(ShoppingList.self).filter("name Contains[cd] %@", itemTF.text).sorted(byKeyPath: "name", ascending: true) else { return }
+        
+        result.forEach({ list in
+            searchItem.append(list)
+        })
+        searching = true
+        shoppingListTB.reloadData()
         print(result)
     }
 }
 
-//MARK: tableView
+//MARK: extension ---------------------------------------------------------------------------
+// tableView
+class ShoppingListCell: UITableViewCell {
+    @IBOutlet weak var itemLB: UILabel!
+    @IBOutlet weak var priceLB: UILabel!
+}
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let items = item else { return 0 }
+        
+        if searching {
+            return searchItem.count
+        }
         return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ShoppingListCell
         guard let items = item else { return cell }
-        let item = items[indexPath.row]
-        cell.itemLB.text = item.name
-        cell.priceLB.text = item.price
+
+        if searching {
+            cell.itemLB.text = searchItem[indexPath.row].name
+            cell.priceLB.text = searchItem[indexPath.row].price
+        } else {
+            cell.itemLB.text = items[indexPath.row].name
+            cell.priceLB.text = items[indexPath.row].price
+        }
         return cell
     }
 
 }
 
-class ShoppingListCell: UITableViewCell {
-    @IBOutlet weak var itemLB: UILabel!
-    @IBOutlet weak var priceLB: UILabel!
+// textField
+extension ViewController: UITextFieldDelegate {
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        itemTF.resignFirstResponder()
+        searchItem.removeAll()
+        if let items = item {
+            items.forEach({ list in
+                searchItem.append(list)
+            })
+        }
+        shoppingListTB.reloadData()
+        return false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let itemText = itemTF.text, let items = item {
+            if itemText.count != 0 {
+                searchItem.removeAll()
+                guard let result = realm?.objects(ShoppingList.self).filter("name Contains[cd] %@", itemTF.text).sorted(byKeyPath: "name", ascending: true) else { return false }
+                result.forEach({ list in
+                    searchItem.append(list)
+                })
+            }
+        }
+        shoppingListTB.reloadData()
+        return true
+    }
+    
 }
+
+
